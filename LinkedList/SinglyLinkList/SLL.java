@@ -4,9 +4,65 @@ import java.util.Scanner;
 
 class SLL
 {
-    static void Insert()
+    static class Node
     {
+        int data;
+        Node next;
+        Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+    }
+    static Node head;
+    static int ch1=0,targetData;
+    static Scanner sc = new Scanner(System.in);
 
+    static void Insert(int new_data)
+    {
+        System.out.println("\n1.Insert at Front \n2.Insert at End \n3.Insert at Middle\n>>> ");
+        ch1=sc.nextInt();
+        if(ch1==1)
+        {
+            Node new_node = new Node(new_data);
+            new_node.next = head;
+            head = new_node;
+        }
+        else if(ch1==2)
+        {
+            Node new_node = new Node(new_data);
+            if(head==null)
+            {
+                head = new Node(new_data);
+                return;
+            }
+            new_node.next = null;
+            Node last = head;
+            while(last.next != null)
+            {
+                last = last.next;
+            }
+            last.next = new_node;
+            return;
+        }
+        else if(ch1==3)
+        {
+            System.out.println("Enter the data of the node after which you want to insert: ");
+            targetData=sc.nextInt();
+            Node prev_node = head;
+            while (prev_node != null && prev_node.data != targetData) {
+                prev_node = prev_node.next;
+            }
+            if(prev_node == null)
+            {
+                System.out.println("The given previous node cannot be null");
+                return;
+            }
+            Node new_node = new Node(new_data);
+            new_node.next = prev_node.next;
+            prev_node.next = new_node;
+
+        }
     }
     static void Search()
     {
@@ -18,7 +74,13 @@ class SLL
     }
     static void Display()
     {
-
+        Node node = head;
+        while(node != null)
+        {
+            System.out.print(node.data + " -> ");
+            node = node.next;
+        }
+        System.out.print("NULL");
     }
     static void Count()
     {
@@ -32,7 +94,7 @@ class SLL
     {
         SLL x = new SLL();
         Scanner sc = new Scanner(System.in);
-        int ch=0;
+        int ch=0,data;
         do
         {
             System.out.println("\n1.Insert\n2.Search\n3.Delete\n4.Display\n5.Count\n6.Reverse\n7.Exit");
@@ -42,7 +104,9 @@ class SLL
             switch(ch)
             {
                 case 1:
-                    x.Insert();
+                    System.out.println("Enter Data to Insert >> ");
+                    data=sc.nextInt();
+                    x.Insert(data);
                     break;
                 case 2:
                     x.Search();
