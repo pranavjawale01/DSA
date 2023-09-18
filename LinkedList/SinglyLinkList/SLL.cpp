@@ -73,9 +73,22 @@ class SLL {
             }
         }
     }
-    void Search()
+    void Search(int element)
     {
-
+        int count=0;
+        Node* current = head;
+        while(current != NULL)
+        {
+            if(current->data == element)
+            {
+                cout<<"Element "<<current->data<<" is found at index "<<count;
+                return;
+            }
+            current = current->next;
+            count++;
+        }
+        cout<<"Element Not Present in Linked List";
+        return;
     }
     void Delete()
     {
@@ -117,7 +130,9 @@ int main()
                 x.Insert(data);
                 break;
             case 2:
-                x.Search();
+                cout<<"\nEnter Element to Search >>> ";
+                cin>>data;
+                x.Search(data);
                 break;
             case 3:
                 x.Delete();

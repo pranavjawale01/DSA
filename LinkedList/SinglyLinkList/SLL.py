@@ -43,8 +43,17 @@ class SLL:
                 new_node.next = prev_node.next
                 prev_node.next = new_node   
         
-    def Search(self):
-        pass
+    def Search(self,element):
+        current = self.head
+        count=0
+        while current!= None:
+            if current.data == element:
+                print("Element ",current.data," is found at index ",count)
+                return
+            current = current.next
+            count += 1
+        print("Element Not present in LinkList")
+        return
         
     def Delete(self):
         pass
@@ -73,7 +82,9 @@ if __name__ == "__main__":
             data = int(input())
             x.Insert(data)
         elif ch == 2:
-            x.Search()
+            print("\nEnter Element to search")
+            data = int(input())
+            x.Search(data)
         elif ch == 3:
             x.Delete()
         elif ch == 4:

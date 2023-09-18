@@ -64,9 +64,22 @@ class SLL
 
         }
     }
-    static void Search()
+    static void Search(int element)
     {
-
+        Node current = head; 
+        int count=0;
+        while(current != null)
+        {
+            if(current.data == element)
+            {
+                System.out.println("Element "+current.data+" is found at index "+count);
+                return;
+            }
+            current = current.next;
+            count++;
+        }
+        System.out.println("Element Not present in LinkedList");
+        return;
     }
     static void Delete()
     {
@@ -109,7 +122,9 @@ class SLL
                     x.Insert(data);
                     break;
                 case 2:
-                    x.Search();
+                    System.out.println("Enter Element to search");
+                    data=sc.nextInt();
+                    x.Search(data);
                     break;
                 case 3:
                     x.Delete();

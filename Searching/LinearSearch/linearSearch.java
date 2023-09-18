@@ -1,4 +1,4 @@
-package DSA.Searching;
+package DSA.Searching.LinearSearch;
 
 import java.util.Arrays;
 import java.util.Scanner;
