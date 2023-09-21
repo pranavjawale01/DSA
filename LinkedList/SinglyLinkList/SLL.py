@@ -66,7 +66,12 @@ class SLL:
         print("NULL")
         
     def Count(self):
-        pass
+        count = 0
+        temp = self.head
+        while(temp):
+            temp = temp.next
+            count += 1
+        print("The Number of Node's in List is >> ",count)
         
     def Reverse(self):
         pass

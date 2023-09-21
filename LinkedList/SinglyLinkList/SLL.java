@@ -97,7 +97,14 @@ class SLL
     }
     static void Count()
     {
-
+        int count  = 0;
+        Node node = head;
+        while(node != null)
+        {
+            node = node.next;
+            count += 1;
+        }
+        System.out.println("The Number of Node's in Linked List is >> "+count);
     }
     static void Reverse()
     {

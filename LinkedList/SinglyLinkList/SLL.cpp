@@ -106,7 +106,14 @@ class SLL {
     }
     void Count()
     {
-
+        int count = 0;
+        Node* current = head;
+        while(current != nullptr)
+        {
+            current = current->next;
+            count +=1;
+        }
+        cout<<"The Number of Node's in Link List is >> "<<count;
     }
     void Reverse()
     {
