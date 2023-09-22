@@ -92,7 +92,63 @@ class SLL {
     }
     void Delete()
     {
-
+        cout<<"\n1.Delete Node By Index \n2.Delete Node by Value \n>> ";
+        cin>>ch1;
+        if(ch1==1)
+        {
+            cout<<"\nEnter the Index >> ";
+            cin>>targetData;
+            if(head==nullptr)
+            {
+                return;
+            }
+            Node* temp = head;
+            if(targetData==0)
+            {
+                head = temp->next;
+                free(temp);
+                return;
+            }
+            for(int i=0;temp!=nullptr && i<targetData-1;i++)
+            {
+                temp = temp->next;
+            }
+            if(temp == nullptr || temp->next == nullptr)
+            {
+                return;
+            }
+            Node* next = temp->next->next;
+            free(temp->next);
+            temp->next = next;
+        }
+        else if(ch1==2)
+        {
+            cout<<"\nEnter the Value >> ";
+            cin>>targetData;
+            if(head==nullptr)
+            {
+                return;
+            }
+            if(head->data==targetData)
+            {
+                Node* temp = head;
+                head = head->next;
+                delete temp;
+                return;
+            }
+            Node* current = head;
+            while(current->next != nullptr && current->next->data != targetData)
+            {
+                current = current->next;
+            }
+            if(current->next == nullptr)
+            {
+                return;
+            }
+            Node* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        }
     }
     void Display()
     {
@@ -117,7 +173,17 @@ class SLL {
     }
     void Reverse()
     {
-
+        Node* current = head;
+        Node* prev = nullptr;
+        Node* next = nullptr;
+        while(current!=nullptr)
+        {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
 };
 

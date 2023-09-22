@@ -83,7 +83,57 @@ class SLL
     }
     static void Delete()
     {
-
+        System.out.println("1.Delete Node By Index \n2.Delete Node by Value \n>> ");
+        ch1 = sc.nextInt();
+        if(ch1==1)
+        {
+            System.out.println("Enter the Index >> ");
+            targetData = sc.nextInt();
+            if(head==null)
+            {
+                return;
+            }
+            Node temp = head;
+            if(targetData==0)
+            {
+                head = temp.next;
+                return;
+            }
+            for(int i=0;temp!=null && i < targetData-1;i++)
+            {
+                temp = temp.next;
+            }
+            if(temp == null || temp.next == null)
+            {
+                return;
+            }
+            Node next = temp.next.next;
+            temp.next = next;
+        }
+        else if(ch1==2)
+        {
+            System.out.println("Enter the Value >> ");
+            targetData = sc.nextInt();
+            if(head == null)
+            {
+                return;
+            }
+            if(head.data == targetData)
+            {
+                head = head.next;
+                return;
+            }
+            Node current = head;
+            while(current.next != null && current.next.data != targetData)
+            {
+                current = current.next;
+            }
+            if(current.next == null)
+            {
+                return;
+            }
+            current.next = current.next.next;
+        }
     }
     static void Display()
     {
@@ -108,7 +158,17 @@ class SLL
     }
     static void Reverse()
     {
-
+        Node current = head;
+        Node prev = null;
+        Node next = null;
+        while(current!=null)
+        {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
     public static void main(String[] args)
     {

@@ -56,7 +56,41 @@ class SLL:
         return
         
     def Delete(self):
-        pass
+        print("\n1.Delete Node By Index \n2.Delete Node by Value \n>> ")
+        ch1 = int(input())
+        if(ch1==1):
+            print("Enter the Index >> ")
+            targetData = int(input())
+            if self.head is None:
+                return
+            index = 0
+            current = self.head
+            while current.next and index < targetData:
+                previous = current
+                current = current.next
+                index += 1
+            if index<targetData:
+                print('Index out of range')
+            elif index==0:
+                self.head = self.head.next
+            else:
+                previous.next = current.next
+            
+        elif(ch1==2):
+            print("Enter the Value >> ")
+            targetData = int(input())
+            if self.head is None:
+                return
+            if self.head.data == targetData:
+                self.head = self.head.next
+                return
+            current = self.head
+            while current.next is not None and current.next.data != targetData:
+                current = current.next
+            
+            if current.next is not None:
+                current.next = current.next.next
+                
         
     def Display(self):
         temp = self.head
@@ -74,7 +108,16 @@ class SLL:
         print("The Number of Node's in List is >> ",count)
         
     def Reverse(self):
-        pass
+        current = self.head
+        next = None
+        prev = None
+        while current != None:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+        
         
 if __name__ == "__main__":
     x = SLL()
