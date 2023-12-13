@@ -1,7 +1,6 @@
 #include<iostream>
 using namespace std;
 
-
 class Node
 {
     public:
@@ -72,17 +71,70 @@ class DLL
 
     void Search()
     {
-
+        int i = 0;
+        if (head == nullptr) {
+            cout<<"\nThe DLL is empty";
+            return;
+        }
+        cout<<"\nEnter the data to search : "<<endl;
+        cin>>targetData;
+        Node* temp = head;
+        while (temp != nullptr) {
+            if (temp->data == targetData){
+                cout<<"\nData found in the DLL. At index "<<i;
+            }
+            i++;
+            temp = temp->next;
+        }
+        cout << "\nData not found in the DLL.";
     }
 
     void Delete()
     {
-
+        if (head == nullptr) {
+            cout<<"\nThe DLL is empty. Can't perform delete"<<endl;
+            return;
+        }
+        cout<<"\nEnter the data to delete : ";
+        cin >> targetData;
+        Node* temp = head;
+        while (temp != nullptr && temp->data != targetData) {
+            temp = temp->next;
+        }
+        if (temp == nullptr) {
+            cout<<"\nData not ffound in DLL"<<endl;
+            return;
+        }
+        if (temp->prev != nullptr) {
+            temp->prev->next = temp->next;
+        } else {
+            head = temp->next;
+        }
+        if (temp->next != nullptr) {
+            temp->next->prev = temp->prev;
+        }
+        delete temp;
+        cout<<"\nData deleted from the DLL";
     }
 
     void Update()
     {
-
+        if (head == nullptr) {
+            cout<<"\nThe DLL is empty.";
+            return;
+        }
+        cout<<"\nEnter the data to update : ";
+        cin>>targetData;
+        Node* temp = head;
+        while (temp != nullptr && temp->data != targetData) {
+            temp = temp->next;
+        }
+        if (temp == nullptr) {
+            cout<<"\nData not found in the DLL.";
+        }
+        cout<<"\nEnter the new data value : ";
+        cin>>temp->data;
+        cout<<"\nData Update in the DLL";
     }
 
     void Display()
@@ -102,12 +154,33 @@ class DLL
 
     void Count()
     {
-
+        int count = 0;
+        Node* temp = head;
+        while (temp != nullptr) {
+            count++;
+            temp = temp->next;
+        }
+        cout<<"\nNumber of nodes in the DLL : "<<count<<endl;
     }
 
     void Reverse()
     {
-
+        cout<<"DLL Before Reveresed >> "<<endl;
+        Display();
+        cout<<endl<<endl;
+        Node* current = head;
+        Node* temp = nullptr;
+        while (current != nullptr) {
+            temp = current->prev;
+            current->prev = current->next;
+            current->next = temp;
+            current = current->prev;
+        }
+        if (temp != nullptr) {
+            head = temp->prev;
+        }
+        cout<<"DLL After Reveresed >> "<<endl;
+        Display();
     }
 };
 
@@ -121,17 +194,17 @@ int main()
         if (ch == 1) {
             x.Insert();
         } else if (ch == 2) {
-
+            x.Search();
         } else if (ch == 3) {
-
+            x.Delete();
         } else if (ch == 4) {
-
+            x.Update();
         } else if (ch == 5) {
             x.Display();
         } else if (ch == 6) {
-
+            x.Count();
         } else if (ch == 7) {
-
+            x.Reverse();
         }
     }
     return 0;
