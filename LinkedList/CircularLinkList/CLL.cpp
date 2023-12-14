@@ -165,7 +165,7 @@ class CLL {
         } while (temp != head);
         cout<<"Total "<<count<<" nodes are present";
     }
-
+ 
     void Reverse() {
         if (!head || !(head->next)) {
             cout << "List is empty or has only one node. No reversal needed." << endl;
