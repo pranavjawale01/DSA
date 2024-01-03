@@ -18,7 +18,7 @@ public:
     void enqueue(int data) {
         if (isFull()) {
             cout << "Queue is Full" << endl;
-        } else {
+        } else { 
             if (isEmpty()) {
                 front = 0;
             }
