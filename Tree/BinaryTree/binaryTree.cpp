@@ -318,17 +318,17 @@ public:
         PrintTree(root,0);
     }
 
-    void PrintTree(Node* node, int level) {
+    void PrintTree(Node* node, int level, const string& indent = "   ", bool isLeft = true) {
         if (node != nullptr) {
-            PrintTree(node->right, level + 1);
-
-            for (int i = 0; i < level; ++i) {
-                cout << "   ";
+            if (node->right != nullptr) {
+                PrintTree(node->right, level + 1, indent, false);
             }
 
-            cout << "|--" << node->data << endl;
+            cout << string(level * 3, ' ') << (isLeft ? "└── " : "┌── ") << node->data << endl;
 
-            PrintTree(node->left, level + 1);
+            if (node->left != nullptr) {
+                PrintTree(node->left, level + 1, indent, true);
+            }
         }
     }
 
@@ -336,6 +336,49 @@ public:
         cout << "Print Binary Tree:" << endl;
         PrintTree(root, 0);
         cout << endl;
+    }
+
+    void balanceTree() {
+        vector<int> sortedElements;
+        inorderTraversal(root, sortedElements);
+
+        int n = sortedElements.size();
+        root = buildBalancedTree(sortedElements, 0, n - 1);
+    }
+
+    void printInorder(Node* node) {
+        printInorder(node->left);
+        cout << node->data << " ";
+        printInorder(node->right);
+    }
+
+    void printInorder() {
+        printInorder(root);
+        cout << endl;
+    }
+
+private:
+    void inorderTraversal(Node* node, vector<int>& sortedElements) {
+        if (node == nullptr) {
+            return;
+        }
+        inorderTraversal(node->left, sortedElements);
+        sortedElements.push_back(node->data);
+        inorderTraversal(node->right, sortedElements);
+    }
+
+    Node* buildBalancedTree(vector<int>& sortedElements, int start, int end) {
+        if (start > end) {
+            return nullptr;
+        }
+
+        int mid = (start + end) / 2;
+        Node* root = new Node(sortedElements[mid]);
+
+        root->left = buildBalancedTree(sortedElements, start, mid - 1);
+        root->right = buildBalancedTree(sortedElements, mid + 1, end);
+
+        return root;
     }
 };
 
@@ -415,7 +458,8 @@ int main() {
                 x.FindLeafNodes();
                 break;
             case 9:
-                x.CheckFullBinaryTree();
+                x.balanceTree();
+                cout << "Tree balanced." << endl;
                 break;
             case 10:
                 x.CheckBalance();
